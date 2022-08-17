@@ -32,6 +32,8 @@ set SYNTH_FLAGS(ROUTE_DIRECTIVE) "NoTimingRelaxation"
 # The description of usage of this array is provided in the Parametrization section
 # of the NDK-CORE repository.
 set CARD_ARCHGRP(CORE_BASE)             $CORE_BASE
+set CARD_ARCHGRP(PCIE_ENDPOINTS)        $PCIE_ENDPOINTS
+set CARD_ARCHGRP(PCIE_ENDPOINT_MODE)    $PCIE_ENDPOINT_MODE
 
 # make lists from associative arrays
 set CARD_ARCHGRP_L [array get CARD_ARCHGRP]

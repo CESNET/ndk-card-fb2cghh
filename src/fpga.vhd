@@ -26,10 +26,10 @@ port (
     PCIE_SYSCLK_P       : in    std_logic;
     PCIE_SYSCLK_N       : in    std_logic;
     PCIE_SYSRST_N       : in    std_logic;
-    PCIE_RX_P           : in    std_logic_vector(16-1 downto 0);
-    PCIE_RX_N           : in    std_logic_vector(16-1 downto 0);
-    PCIE_TX_P           : out   std_logic_vector(16-1 downto 0);
-    PCIE_TX_N           : out   std_logic_vector(16-1 downto 0);
+    PCIE_RX_P           : in    std_logic_vector(PCIE_LANES -1 downto 0);
+    PCIE_RX_N           : in    std_logic_vector(PCIE_LANES -1 downto 0);
+    PCIE_TX_P           : out   std_logic_vector(PCIE_LANES -1 downto 0);
+    PCIE_TX_N           : out   std_logic_vector(PCIE_LANES -1 downto 0);
 
     -- 50 MHz external clock 
     REFCLK              : in    std_logic;
@@ -91,7 +91,6 @@ architecture FULL of FPGA is
     -- DMA debug parameters
     constant DMA_GEN_LOOP_EN     : boolean := true;
 
-    constant PCIE_LANES          : integer := 16;
     constant PCIE_CLKS           : integer := 1;
     constant PCIE_CONS           : integer := 1;
     constant MISC_IN_WIDTH       : integer := 1+1+32+1+1+32;

@@ -36,6 +36,18 @@ set ETH_PORT_LANES(0) 4
 set ETH_PORT_LANES(1) 4
 
 # ------------------------------------------------------------------------------
+# PCIe parameters (not all combinations work):
+# ------------------------------------------------------------------------------
+# Supported combinations for this card:
+# 1x PCIe Gen3 x16 -- PCIE_ENDPOINT_MODE=0 (Note: default configuration)
+# 1x PCIe Gen3 x8  -- PCIE_ENDPOINT_MODE=2 (Low-latency configuration)
+# ------------------------------------------------------------------------------
+# PCIe endpoint mode (possible values: 0, 2):
+# 0 = 1x16 lanes
+# 2 = 1x8 Low-latency (Xilinx USP only)
+set PCIE_ENDPOINT_MODE 0
+
+# ------------------------------------------------------------------------------
 # DMA parameters:
 # ------------------------------------------------------------------------------
 # This variable can be set in COREs *.mk file or as a parameter when launching the make
