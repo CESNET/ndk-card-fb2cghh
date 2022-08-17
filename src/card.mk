@@ -44,6 +44,8 @@ NETCOPE_ENV = \
 	ETH_PORTS=$(ETH_PORTS) \
 	ETH_PORT_SPEED=$(ETH_PORT_SPEED) \
 	ETH_PORT_CHAN=$(ETH_PORT_CHAN) \
+	DMA_TYPE=$(DMA_TYPE) \
 	$(USER_ENV)
 
+include $(CORE_BASE)/core.mk
 include $(OFM_PATH)/build/Makefile.Vivado.inc
