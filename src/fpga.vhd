@@ -103,6 +103,7 @@ architecture FULL of FPGA is
     constant ETH_LANE_MAP        : integer_vector(2*ETH_LANES-1 downto 0) := (3, 2, 1, 0, 3, 2, 1, 0);
     constant ETH_LANE_RXPOLARITY : std_logic_vector(2*ETH_LANES-1 downto 0) := "00000000";
     constant ETH_LANE_TXPOLARITY : std_logic_vector(2*ETH_LANES-1 downto 0) := "00000000";
+    constant DEVICE              : string  := "ULTRASCALE";
 
     signal sysclk_ibuf      : std_logic;
     signal sysclk_bufg      : std_logic;
@@ -129,10 +130,19 @@ architecture FULL of FPGA is
     signal misc_in          : std_logic_vector(MISC_IN_WIDTH-1 downto 0) := (others => '0');
     signal misc_out         : std_logic_vector(MISC_OUT_WIDTH-1 downto 0);
 
-    -- BMC controller
-    signal flash_rd_data    : std_logic_vector(63 downto 0);
-    signal flash_wr_data    : std_logic_vector(63 downto 0);
-    signal flash_wr_str     : std_logic;
+    signal pcie_clk         : std_logic;
+    signal pcie_reset       : std_logic;
+
+    signal boot_mi_clk      : std_logic;
+    signal boot_mi_reset    : std_logic;
+    signal boot_mi_dwr      : std_logic_vector(31 downto 0);
+    signal boot_mi_addr     : std_logic_vector(31 downto 0);
+    signal boot_mi_rd       : std_logic;
+    signal boot_mi_wr       : std_logic;
+    signal boot_mi_be       : std_logic_vector(3 downto 0);
+    signal boot_mi_drd      : std_logic_vector(31 downto 0);
+    signal boot_mi_ardy     : std_logic;
+    signal boot_mi_drdy     : std_logic;
 
     -- Quad SPI controller
     signal axi_spi_clk      : std_logic;
@@ -211,29 +221,52 @@ begin
 
     qsfp_modprs_n <= QSFP1_MODPRS_N & QSFP0_MODPRS_N;
     qsfp_int_n    <= QSFP1_INT_N & QSFP0_INT_N;
-    
-    -- misc signals
-    misc_in(0)                   <= bmc_mi_ardy_s;
-    misc_in(1)                   <= bmc_mi_drdy_s;
-    misc_in(32+2-1downto 2)      <= bmc_mi_drd_s;
-    misc_in(34)                  <= axi_mi_ardy_s;
-    misc_in(35)                  <= axi_mi_drdy_s;
-    misc_in(32+36-1 downto 36)   <= axi_mi_drd_s;
 
-    axi_spi_clk     <= misc_out(0);
-    boot_clk        <= misc_out(1);
-    boot_reset      <= misc_out(2);
-    bmc_mi_wr_s     <= misc_out(3);
-    bmc_mi_rd_s     <= misc_out(4);
-    bmc_mi_be_s     <= misc_out(4+5-1 downto 5);
-    bmc_mi_addr_s   <= misc_out(8+9-1 downto 9);
-    bmc_mi_dwr_s    <= misc_out(32+17-1 downto 17);
-    axi_mi_wr_s     <= misc_out(49);
-    axi_mi_rd_s     <= misc_out(50);
-    axi_mi_be_s     <= misc_out(4+51-1 downto 51);
-    axi_mi_addr_s   <= misc_out(8+55-1 downto 55);
-    axi_mi_dwr_s    <= misc_out(32+63-1 downto 63);
+    axi_spi_clk     <= misc_out(0); -- usr_x1 = 100MHz
+    boot_clk        <= misc_out(2); -- usr_x2 = 200MHz
+    boot_reset      <= misc_out(3);
 
+    boot_ctrl_i : entity work.BOOT_CTRL
+    generic map(
+        DEVICE      => DEVICE,
+        BOOT_TYPE   => 3
+    )
+    port map(
+        MI_CLK        => boot_mi_clk,
+        MI_RESET      => boot_mi_reset,
+        MI_DWR        => boot_mi_dwr,
+        MI_ADDR       => boot_mi_addr,
+        MI_BE         => boot_mi_be,
+        MI_RD         => boot_mi_rd,
+        MI_WR         => boot_mi_wr,
+        MI_ARDY       => boot_mi_ardy,
+        MI_DRD        => boot_mi_drd,
+        MI_DRDY       => boot_mi_drdy,
+
+        BOOT_CLK      => boot_clk,
+        BOOT_RESET    => boot_reset,
+
+        BOOT_REQUEST  => open,
+        BOOT_IMAGE    => open,
+
+        BMC_MI_ADDR   => bmc_mi_addr_s,
+        BMC_MI_DWR    => bmc_mi_dwr_s, 
+        BMC_MI_WR     => bmc_mi_wr_s,
+        BMC_MI_RD     => bmc_mi_rd_s,
+        BMC_MI_BE     => bmc_mi_be_s,
+        BMC_MI_ARDY   => bmc_mi_ardy_s,
+        BMC_MI_DRD    => bmc_mi_drd_s,
+        BMC_MI_DRDY   => bmc_mi_drdy_s,
+        
+        AXI_MI_ADDR   => axi_mi_addr_s,
+        AXI_MI_DWR    => axi_mi_dwr_s, 
+        AXI_MI_WR     => axi_mi_wr_s,
+        AXI_MI_RD     => axi_mi_rd_s,
+        AXI_MI_BE     => axi_mi_be_s,
+        AXI_MI_ARDY   => axi_mi_ardy_s,
+        AXI_MI_DRD    => axi_mi_drd_s,
+        AXI_MI_DRDY   => axi_mi_drdy_s
+    );
 
     bmc_ctrl_i: entity work.bmc_driver
     port map(
@@ -337,7 +370,7 @@ begin
         DMA_TX_CHANNELS         => DMA_TX_CHANNELS/DMA_MODULES,
 
         BOARD                   => BOARD,
-        DEVICE                  => "ULTRASCALE",
+        DEVICE                  => DEVICE,
 
         DMA_GEN_LOOP_EN         => DMA_GEN_LOOP_EN
     )
@@ -375,6 +408,20 @@ begin
 
         STATUS_LED_G            => LED_STATUS,
         STATUS_LED_R            => open,
+
+        PCIE_CLK                => pcie_clk,
+        PCIE_RESET              => pcie_reset,
+    
+        BOOT_MI_CLK             => boot_mi_clk,
+        BOOT_MI_RESET           => boot_mi_reset,
+        BOOT_MI_DWR             => boot_mi_dwr,
+        BOOT_MI_ADDR            => boot_mi_addr,
+        BOOT_MI_RD              => boot_mi_rd,
+        BOOT_MI_WR              => boot_mi_wr,
+        BOOT_MI_BE              => boot_mi_be,
+        BOOT_MI_DRD             => boot_mi_drd,
+        BOOT_MI_ARDY            => boot_mi_ardy,
+        BOOT_MI_DRDY            => boot_mi_drdy,
 
         MISC_IN                 => misc_in,
         MISC_OUT                => misc_out
