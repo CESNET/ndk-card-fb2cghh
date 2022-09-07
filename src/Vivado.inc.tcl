@@ -27,7 +27,6 @@ set SYNTH_FLAGS(PLACE_DIRECTIVE) "ExtraTimingOpt"
 set SYNTH_FLAGS(POPT_DIRECTIVE)  "Explore"
 set SYNTH_FLAGS(ROUTE_DIRECTIVE) "NoTimingRelaxation"
 
-
 # Main component
 lappend HIERARCHY(COMPONENTS) [list "TOPLEVEL" $CARD_BASE/src "FULL"]
 
@@ -36,4 +35,4 @@ lappend SYNTH_FLAGS(CONSTR) "$CARD_BASE/constr/bitstream.xdc"
 lappend SYNTH_FLAGS(CONSTR) "$CARD_BASE/constr/general.xdc"
 lappend SYNTH_FLAGS(CONSTR) "$CARD_BASE/constr/pcie.xdc"
 lappend SYNTH_FLAGS(CONSTR) "$CARD_BASE/constr/qsfp.xdc"
-
+lappend SYNTH_FLAGS(CONSTR) "$CARD_BASE/constr/qsfp_loc.xdc"
