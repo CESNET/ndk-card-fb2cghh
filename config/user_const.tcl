@@ -74,5 +74,7 @@ set DMA_RX_BLOCKING_MODE true
 
 # Other parameters:
 # =================
-set TSU_ENABLE false
+set TSU_ENABLE true
+set TSU_FREQUENCY 322265625
+
 set MEM_PORTS 0
