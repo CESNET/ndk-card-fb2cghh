@@ -1,6 +1,7 @@
 # card.mk: Makefile include
 # Copyright (C) 2022 CESNET z. s. p. o.
 # Author(s): Jakub Cabal <cabal@cesnet.cz>
+# 			Vladislav Valek <valekv@cesnet.cz>
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
@@ -25,18 +26,20 @@ USER_ENV ?=
 # Get directory of this Makefile.inc
 CARD_BASE_LOCAL := $(dir $(lastword $(MAKEFILE_LIST)))
 CARD_BASE ?= $(CARD_BASE_LOCAL)/..
+CORE_BASE ?= $(COMBO_BASE)/ndk/core/intel
 
-NDK_CONST = $(CARD_BASE)/config/ndk_const.tcl
-DEFAULT_CONST = $(CARD_BASE)/config/user_const.tcl
+CARD_NDK_CONST = $(CARD_BASE)/config/ndk_const.tcl
+CARD_USER_CONST = $(CARD_BASE)/config/user_const.tcl
 
 NETCOPE_ENV = \
 	OFM_PATH=$(OFM_PATH)\
 	COMBO_BASE=$(COMBO_BASE)\
 	FIRMWARE_BASE=$(FIRMWARE_BASE)\
 	CARD_BASE=$(CARD_BASE) \
-	NDK_CONST=$(NDK_CONST) \
-	DEFAULT_CONST=$(DEFAULT_CONST) \
-	USER_CONST=$(USER_CONST) \
+	CORE_BASE=$(CORE_BASE) \
+	CARD_NDK_CONST=$(CARD_NDK_CONST) \
+	CARD_USER_CONST=$(CARD_USER_CONST) \
+	APP_USER_CONST=$(APP_USER_CONST) \
 	OUTPUT_NAME=$(OUTPUT_NAME) \
 	ETH_PORTS=$(ETH_PORTS) \
 	ETH_PORT_SPEED=$(ETH_PORT_SPEED) \

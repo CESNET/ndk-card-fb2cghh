@@ -5,10 +5,10 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 # NDK constants (populates all NDK variables from env)
-source $env(NDK_CONST)
+source $env(CARD_NDK_CONST)
 
 # Include common card script
-source $CARD_COMMON_BASE/Vivado.inc.tcl
+source $CORE_BASE/Vivado.inc.tcl
 
 # Design parameters
 set SYNTH_FLAGS(MODULE)    "fpga"

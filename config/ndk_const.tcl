@@ -4,16 +4,18 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
+
 set OFM_PATH        $env(OFM_PATH)
 set COMBO_BASE      $env(COMBO_BASE)
 set FIRMWARE_BASE   $env(FIRMWARE_BASE)
 set CARD_BASE       $env(CARD_BASE)
-set NDK_CONST       $env(NDK_CONST)
-set DEFAULT_CONST   $env(DEFAULT_CONST)
-set USER_CONST      $env(USER_CONST)
+set CORE_BASE       $env(CORE_BASE)
+set CARD_NDK_CONST  $env(CARD_NDK_CONST)
+set CARD_USER_CONST $env(CARD_USER_CONST)
+set APP_USER_CONST 	$env(APP_USER_CONST)
 set OUTPUT_NAME     $env(OUTPUT_NAME)
 
-set CARD_COMMON_BASE $COMBO_BASE/ndk/core/intel
+set CORE_USER_CONST $CORE_BASE/config/user_const.tcl
 
 source $OFM_PATH/build/VhdlPkgGen.tcl
 source $OFM_PATH/build/Shared.tcl
@@ -30,13 +32,16 @@ set SDM_SYSMON_ARCH "USP_IDCOMP"
 
 VhdlPkgBegin
 
-# Source default constants
-source $DEFAULT_CONST
+# Source core constant values (common for all card types)
+source $CORE_USER_CONST
 
-# Source application constants if they exists
-if {$USER_CONST ne ""} {
-	source $USER_CONST
+# Source user constants specific for a current card type
+source $CARD_USER_CONST
+
+# Source application specific user constants, they have the highest priority
+if {$APP_USER_CONST ne ""} {
+	source $APP_USER_CONST
 }
 
-# Source common core const scripts
-source $CARD_COMMON_BASE/config/ndk_const.tcl
+# Generating of the VHDL package
+source $CORE_BASE/config/ndk_pkg_gen.tcl
