@@ -5,8 +5,8 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# NDK constants (populates all NDK variables from env)
-source $env(CARD_NDK_CONST)
+# configuration constants (populates all variables from env)
+source $env(CARD_CONST)
 
 # Include common card script
 source $CORE_BASE/Vivado.inc.tcl
