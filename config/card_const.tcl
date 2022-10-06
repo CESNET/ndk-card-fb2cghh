@@ -5,10 +5,9 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# ==============================================================================
-# WARNING: The user should not deliberately change constants in this file. They
-# are either set to default values or set from the environment variables.
-# ==============================================================================
+# WARNING: The user should not deliberately change parameters in this file. For
+# the description of this file, visit the Parametrization section in the
+# documentation of the NDK-CORE repostiory
 
 set CARD_NAME "FB2CGHH"
 # Achitecture of Clock generator
@@ -62,11 +61,10 @@ set PCIE_ENDPOINTS     1
 # 0 = 1x16 lanes
 set PCIE_ENDPOINT_MODE 0
 
-
 # ------------------------------------------------------------------------------
 # DMA parameters:
 # ------------------------------------------------------------------------------
-# This variable can be changed in common Makefile
+# This variable can be set in COREs *.mk file or as a parameter when launching the make
 set DMA_TYPE    $env(DMA_TYPE)
 
 # ------------------------------------------------------------------------------

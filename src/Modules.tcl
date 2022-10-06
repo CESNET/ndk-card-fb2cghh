@@ -5,7 +5,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# deserializing input ARCHGRP to make an associative array
+# converting input list to associative array
 array set ARCHGRP_ARR $ARCHGRP
 
 # Paths

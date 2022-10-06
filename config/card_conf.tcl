@@ -5,7 +5,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# NOTE: For the detailed description of this file, visit the Configuration section
+# NOTE: For the detailed description of this file, visit the Parametrization section
 # in the documentation of the NDK-CORE repository.
 
 set PROJECT_NAME ""
@@ -20,7 +20,7 @@ set DMA_TX_CHANNELS      16
 # In non-blocking mode, packets are dropped whenever they cannot be sent.
 set DMA_RX_BLOCKING_MODE true
 
-# -----------------
+# ------------------------------------------------------------------------------
 # Other parameters:
-# -----------------
+# ------------------------------------------------------------------------------
 set TSU_ENABLE true

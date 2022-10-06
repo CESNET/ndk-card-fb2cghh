@@ -8,7 +8,7 @@
 # Source configuration files(populates all variables from env)
 source $env(CORE_BASE)/config/core_bootstrap.tcl
 
-# Include common card script
+# Include CORE script
 source $CORE_BASE/Vivado.inc.tcl
 
 # Design parameters
@@ -29,7 +29,8 @@ set SYNTH_FLAGS(POPT_DIRECTIVE)  "Explore"
 set SYNTH_FLAGS(ROUTE_DIRECTIVE) "NoTimingRelaxation"
 
 # Propagating card constants to the Modules.tcl files of the underlying components.
-# Insert others if needed.
+# The description of usage of this array is provided in the Parametrization section
+# of the NDK-CORE repository.
 set CARD_ARCHGRP(CORE_BASE)             $CORE_BASE
 
 # make lists from associative arrays
