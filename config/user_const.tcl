@@ -1,6 +1,7 @@
-# user_const.tcl: Default parameters
+# user_const.tcl: User changeable parameters for the card
 # Copyright (C) 2022 CESNET z. s. p. o.
-# Author(s): David Beneš <benes.david2000@seznam.cz>
+# Author(s): David Beneš     <xbenes52@vutbr.cz>
+#            Vladislav Valek <valekv@cesnet.cz>
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
