@@ -1,4 +1,4 @@
-# ndk_const.tcl: Card specific constants
+# card_const.tcl: Card specific parameters (developement only)
 # Copyright (C) 2022 CESNET, z. s. p. o.
 # Author(s): David Beneš 	 <xbenes52@vutbr.cz>
 #            Vladislav Valek <valekv@cesnet.cz>
@@ -10,24 +10,6 @@
 # are either set to default values or set from the environment variables.
 # ==============================================================================
 
-set OUTPUT_NAME   $env(OUTPUT_NAME)
-set OFM_PATH      $env(OFM_PATH)
-set COMBO_BASE    $env(COMBO_BASE)
-set FIRMWARE_BASE $env(FIRMWARE_BASE)
-set CARD_BASE     $env(CARD_BASE)
-set CORE_BASE     $env(CORE_BASE)
-
-set CORE_CONF  $CORE_BASE/config/core_conf.tcl
-set CORE_CONST $CORE_BASE/config/core_const.tcl
-
-set CARD_CONF  $env(CARD_CONF)
-set CARD_CONST $env(CARD_CONST)
-
-set APP_CONF $env(APP_CONF)
-
-source $OFM_PATH/build/VhdlPkgGen.tcl
-source $OFM_PATH/build/Shared.tcl
-
 set CARD_NAME "FB2CGHH"
 # Achitecture of Clock generator
 set CLOCK_GEN_ARCH "USP"
@@ -37,23 +19,6 @@ set PCIE_MOD_ARCH "USP"
 set NET_MOD_ARCH "CMAC"
 # Achitecture of SDM/SYSMON module
 set SDM_SYSMON_ARCH "USP_IDCOMP"
-
-VhdlPkgBegin
-
-# Source core configuration variables
-source $CORE_CONF
-
-# Source configuration variables specific for a current card type
-source $CARD_CONF
-
-# Source application user configurable parameters
-if {$APP_CONF ne ""} {
-	source $APP_CONF
-}
-
-# ==============================================================================
-# Design configuration constants
-# ==============================================================================
 
 # ------------------------------------------------------------------------------
 # ETH parameters:
@@ -104,9 +69,9 @@ set PCIE_ENDPOINT_MODE 0
 # This variable can be changed in common Makefile
 set DMA_TYPE    $env(DMA_TYPE)
 
+# ------------------------------------------------------------------------------
+# Other parameters:
+# ------------------------------------------------------------------------------
 set TSU_FREQUENCY 322265625
 
 set MEM_PORTS 0
-
-# Generating of the VHDL package
-source $CORE_CONST

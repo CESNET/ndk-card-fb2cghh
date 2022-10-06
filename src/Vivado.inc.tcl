@@ -5,8 +5,8 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# configuration constants (populates all variables from env)
-source $env(CARD_CONST)
+# Source configuration files(populates all variables from env)
+source $env(CORE_BASE)/config/core_bootstrap.tcl
 
 # Include common card script
 source $CORE_BASE/Vivado.inc.tcl
