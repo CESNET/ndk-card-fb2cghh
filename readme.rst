@@ -1,43 +1,32 @@
 .. _card_fb2cghh:
 
-FB2CGHH card
+Silicom fb2CGhh@KU15P
 ---------------------
 
-FB2CGHH card by Silicom is supported in the NDK.
+- Card information:
+    - Vendor: Silicom
+    - Name: fb2CGhh@KU15P
+    - Ethernet ports: 2x QSFP28
+    - PCIe conectors: Edge connector
+    - `FPGA Card Website <https://www.silicom-usa.com/pr/server-adapters/programmable-fpga-server-adapter/fpga-xilinx-based-2/fb2cghhku15p-fpga-card/>`_
+- FPGA specification:
+    - FPGA part number: ``xcku15p-ffve1760-2-e``
+    - Ethernet Hard IP: CMAC (100G Ethernet)
+    - PCIe Hard IP: USP (up to PCIe Gen3 x16)
 
-Build instructions
-^^^^^^^^^^^^^^^^^^
+NDK firmware support
+^^^^^^^^^^^^^^^^^^^^
 
-- Go to ``build/fb2cghh/`` folder in application repository.
-- Check or modify ``user_const.tcl`` file, where you can change the firmware configuration.
-- Run firmware build in Vivado by ``make`` command.
-    - Use ``make`` command for firmware with 2x100GbE for FB2CGHH card (default and only one).
-- After the build is complete, you will find bitstream ``fb2cghh-minimal-100g2.nfw`` in the same folder.
-
-.. note::
-
-    To build firmware, you must have Xilinx Vivado installed, including a valid license.
-
-.. note::
-
-    Source clock for this application is PCIe clock, which is set up to 250 MHz. 
-
-Boot instructions
-^^^^^^^^^^^^^^^^^^
-
-- To boot design on specific card you have to follow these steps:
-    - Copy .nfw file into current directory 
-    - Boot design by using ``nfb-boot -f 0 fb2cghh-minimal-100g2.nfw`` command in directory where .nfw file is located.
-- To confirm that design is booted correctly use ``nfb-info`` command
+- Ethernet cores that are supported in the NDK firmware:
+    - :ref:`CMAC in the Network Module <ndk_intel_net_mod>`
+- PCIe cores that are supported in the NDK firmware:
+    - :ref:`USP in the PCIe Module <ndk_intel_pcie_mod>`
+    - See the ``<NDK-APP_root_directory>/ndk/card/fb2cghh/config/card_conf.tcl`` file for supported PCIe configurations.
+- Makefile targets for building the NDK firmware (valid for NDK-APP-Minimal, may vary for other apps):
+    - Use ``make 100g2`` command for firmware with 2x100GbE (default).
+- Support for booting the NDK firmware using the nfb-boot tool:
+    - YES.
 
 .. note::
 
-    To see boot options use command ``nfb-boot -h``.
-
-Ethernet Interface
-^^^^^^^^^^^^^^^^^^
-This card has two QSFP ports. Each is connected to the FPGA via 4 high-speed serial lines supporting up to 25 Gbps. Each of these ports is connected to CMAC core with speed of ``1x100GE``. The architecture of network module :ref:`is described here <ndk_intel_net_mod>`.
-
-PCIe Interface
-^^^^^^^^^^^^^^^^^^
-This card has single PCIe Gen3 x16 edge connector. The throughput available to the user is approximately 100 Gbps and is depend on DMA solution. The architecture of the PCIe Module :ref:`is described here <ndk_intel_pcie_mod>`.
+    To build the NDK firmware for this card, you must have the Xilinx Vivado installed, including a valid license.
