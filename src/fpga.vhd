@@ -354,6 +354,8 @@ begin
         QSFP_I2C_PORTS          => ETH_PORTS,
         ETH_PORT_LEDS           => 4,
 
+        MEM_PORTS               => 0,
+
         STATUS_LEDS             => 2,
 
         MISC_IN_WIDTH           => MISC_IN_WIDTH,
