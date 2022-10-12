@@ -1,11 +1,11 @@
 .. _card_fb2cghh:
 
-Silicom fb2CGhh@KU15P
+Silicom fb2CGhh\@KU15P
 ---------------------
 
 - Card information:
     - Vendor: Silicom
-    - Name: fb2CGhh@KU15P
+    - Name: fb2CGhh\@KU15P
     - Ethernet ports: 2x QSFP28
     - PCIe conectors: Edge connector
     - `FPGA Card Website <https://www.silicom-usa.com/pr/server-adapters/programmable-fpga-server-adapter/fpga-xilinx-based-2/fb2cghhku15p-fpga-card/>`_
