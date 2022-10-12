@@ -1,17 +1,15 @@
-# FB2CGHH for Network Development Kit (NDK)
+# fb2CGhh@KU15P for the NDK
 
-This repository contains NDK support for the Silicom FB2CGHH card.
-
-Additional repositories are needed to build the NDK design for the FPGA:
-- [NDK Minimal Application (top-level repository)](https://github.com/CESNET/ndk-app-minimal/)
-- [NDK Core](https://github.com/CESNET/ndk-core/)
-- [Open FPGA Modules](https://github.com/CESNET/ofm/)
+This repository contains an extension of the Network Development Kit (NDK) to support the **Silicom fb2CGhh@KU15P** FPGA card.
+- The NDK allows users to quickly and easily develop new network applications based on FPGA acceleration cards.
+- You can build the FPGA firmware for this card using the [NDK-APP-Minimal application](../../../../ndk-app-minimal/). The NDK-APP-Minimal is a reference application based on the NDK.
+- The [NDK-APP-Minimal documentation](https://cesnet.github.io/ndk-app-minimal/) lists steps for building the FPGA firmware, loading it into the FPGA card, and also using it in the chapter "How to start".
 
 ## License
 
 The content of this repository is under a closed license. Please read [LICENSE file](LICENSE).
 
-- The .xci files located in the `src/ip/` folder were generated in Xilinx Vivado, and their use may be subject to additional license agreements.
+- The .xci files located in the `src/ip/` folder were generated in the Xilinx Vivado, and their use may be subject to additional license agreements.
 
 ## Repository Maintainer
 
