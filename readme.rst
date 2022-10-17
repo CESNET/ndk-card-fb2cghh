@@ -1,7 +1,7 @@
 .. _card_fb2cghh:
 
 Silicom fb2CGhh\@KU15P
----------------------
+----------------------
 
 - Card information:
     - Vendor: Silicom
