@@ -7,7 +7,7 @@ This repository contains an extension of the Network Development Kit (NDK) to su
 
 ## License
 
-The content of this repository is under a closed license. Please read [LICENSE file](LICENSE).
+Unless otherwise noted, the content of this repository is available under the BSD 3-Clause License. Please read [LICENSE file](LICENSE).
 
 - The .xci files located in the `src/ip/` folder were generated in the Xilinx Vivado, and their use may be subject to additional license agreements.
 
