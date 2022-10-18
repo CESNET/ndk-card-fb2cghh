@@ -11,8 +11,35 @@
 set PROJECT_NAME ""
 
 # ------------------------------------------------------------------------------
+# ETH parameters:
+# ------------------------------------------------------------------------------
+# Number of Ethernet ports, must match number of items in list ETH_PORTS_SPEED!
+# (with two QSFP). Set the correct number of ETH ports according to your card.
+set ETH_PORTS         $env(ETH_PORTS)
+# Speed for each one of the ETH_PORTS (allowed values: 100)
+# ETH_PORT_SPEED is an array where each index represents given ETH_PORT and
+# each index has associated a required port speed.
+# NOTE: at this moment, all ports must have same speed !
+set ETH_PORT_SPEED(0) $env(ETH_PORT_SPEED)
+set ETH_PORT_SPEED(1) $env(ETH_PORT_SPEED)
+
+# Number of channels for each one of the ETH_PORTS (allowed values: 1 for ETH_PORT_SPEED=100, 4 for ETH_PORT_SPEED<100)
+# ETH_PORT_CHAN is an array where each index represents given ETH_PORT and
+# each index has associated a required number of channels this port has.
+# NOTE: at this moment, all ports must have same number of channels !
+set ETH_PORT_CHAN(0) $env(ETH_PORT_CHAN)
+set ETH_PORT_CHAN(1) $env(ETH_PORT_CHAN)
+
+# Number of lanes for each one of the ETH_PORTS
+# Typical values: 4 (QSFP), 8 (QSFP-DD)
+set ETH_PORT_LANES(0) 4
+set ETH_PORT_LANES(1) 4
+
+# ------------------------------------------------------------------------------
 # DMA parameters:
 # ------------------------------------------------------------------------------
+# This variable can be set in COREs *.mk file or as a parameter when launching the make
+set DMA_TYPE             $env(DMA_TYPE)
 # The minimum number of RX/TX DMA channels for this card is 16.
 set DMA_RX_CHANNELS      16
 set DMA_TX_CHANNELS      16
