@@ -18,15 +18,10 @@ set SYNTH_FLAGS(MCS_IFACE) "SPIx4"
 set SYNTH_FLAGS(BOARD)     $CARD_NAME
 
 # Optimization directives for implementation
-#set SYNTH_FLAGS(SOPT_DIRECTIVE)  "Explore"
-#set SYNTH_FLAGS(PLACE_DIRECTIVE) "Explore"
-#set SYNTH_FLAGS(POPT_DIRECTIVE)  "Explore"
-#set SYNTH_FLAGS(ROUTE_DIRECTIVE) "Explore"
-
-set SYNTH_FLAGS(SOPT_DIRECTIVE)  "ExploreWithRemap"
-set SYNTH_FLAGS(PLACE_DIRECTIVE) "ExtraTimingOpt"
+set SYNTH_FLAGS(SOPT_DIRECTIVE)  "Explore"
+set SYNTH_FLAGS(PLACE_DIRECTIVE) "Explore"
 set SYNTH_FLAGS(POPT_DIRECTIVE)  "Explore"
-set SYNTH_FLAGS(ROUTE_DIRECTIVE) "NoTimingRelaxation"
+set SYNTH_FLAGS(ROUTE_DIRECTIVE) "Explore"
 
 # Propagating card constants to the Modules.tcl files of the underlying components.
 # The description of usage of this array is provided in the Parametrization section
@@ -44,7 +39,6 @@ set ARCHGRP_ALL [concat $CARD_ARCHGRP_L $CORE_ARCHGRP_L]
 lappend HIERARCHY(COMPONENTS) [list "TOPLEVEL" $CARD_BASE/src $ARCHGRP_ALL]
 
 # XDC constraints for specific parts of the design
-lappend SYNTH_FLAGS(CONSTR) "$CARD_BASE/constr/bitstream.xdc"
 lappend SYNTH_FLAGS(CONSTR) "$CARD_BASE/constr/general.xdc"
 lappend SYNTH_FLAGS(CONSTR) "$CARD_BASE/constr/pcie.xdc"
 lappend SYNTH_FLAGS(CONSTR) "$CARD_BASE/constr/qsfp.xdc"

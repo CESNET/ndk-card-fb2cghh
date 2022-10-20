@@ -14,4 +14,3 @@ set_property PACKAGE_PIN AN10    [get_ports {PCIE_SYSCLK_P}]
 set_property PACKAGE_PIN AN9     [get_ports {PCIE_SYSCLK_N}] 
 
 create_clock -period 10.000 -name pcie_clk_p -waveform {0.000 5.000} [get_ports PCIE_SYSCLK_P]
-
