@@ -22,18 +22,12 @@ set SDM_SYSMON_ARCH "USP_IDCOMP"
 # ------------------------------------------------------------------------------
 # PCIe parameters (not all combinations work):
 # ------------------------------------------------------------------------------
-# Supported combinations for this card:
-# 1x PCIe Gen3 x16 -- PCIE_ENDPOINTS=1, PCIE_ENDPOINT_MODE=0 (Note: default configuration)
-# ------------------------------------------------------------------------------
 # PCIe Generation (possible values: 3):
 # 3 = PCIe Gen3
 set PCIE_GEN           3
 # PCIe endpoints (possible values: 1):
 # 1 = 1x PCIe x16 in one slot or 1x PCIe x8 in one slot
 set PCIE_ENDPOINTS     1
-# PCIe endpoint mode (possible values: 0):
-# 0 = 1x16 lanes
-set PCIE_ENDPOINT_MODE 0
 
 # ------------------------------------------------------------------------------
 # Other parameters:

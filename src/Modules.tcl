@@ -22,7 +22,15 @@ lappend COMPONENTS [list "AXI_QUAD_FLASH_CONTROLLER"    $AXI_QUAD_FLASH_CONTROLL
 lappend COMPONENTS [list "BOOT_CTRL"                    $BOOT_CTRL_BASE                  "FULL"  ]
 
 # IP sources
-lappend MOD "$ENTITY_BASE/ip/pcie4_uscale_plus/pcie4_uscale_plus.xci"
+if {$ARCHGRP_ARR(PCIE_ENDPOINTS) == 1} {
+
+    if {$ARCHGRP_ARR(PCIE_ENDPOINT_MODE) == 2} {
+        lappend MOD "$ENTITY_BASE/ip/pcie4_uscale_plus/x8_low_latency/pcie4_uscale_plus.xci"
+    } else {
+        lappend MOD "$ENTITY_BASE/ip/pcie4_uscale_plus/x16/pcie4_uscale_plus.xci"
+    }
+}
+
 lappend MOD "$ENTITY_BASE/ip/xvc_vsec/xvc_vsec.xci"
 lappend MOD "$ENTITY_BASE/ip/cmac_eth_1x100g/cmac_eth_1x100g.xci"
 lappend MOD "$ENTITY_BASE/ip/axi_quad_spi_0/axi_quad_spi_0.xci"
