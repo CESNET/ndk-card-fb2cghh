@@ -2,16 +2,8 @@
 -- Copyright (C) 2022 CESNET z. s. p. o.
 -- Author(s): David Beneš <benes.david2000@seznam.cz>
 --
--- CESNET, association of legal entities (hereinafter referred to as „the
--- association“) owns all right, title and interest in and to the source code
--- and you are not allowed to use it in any way without the permission of the
--- association. In particular, you may not, without the permission of the
--- association, use, execute, reproduce, display, distribute internally or
--- externally, communicate to the public, modify, perform, transmit, adapt or
--- alter the source code in any way (especially, prepare new versions or
--- derivative works based upon the source code), use the source code in a
--- collection or connection with any other work or elements, or incorporate
--- the source code in a database or any other collection of works.
+-- SPDX-License-Identifier: BSD-3-Clause
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE IEEE.std_logic_textio.ALL;

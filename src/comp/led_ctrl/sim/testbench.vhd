@@ -1,3 +1,9 @@
+-- testbench.vhd: Simulation file 
+-- Copyright (C) 2022 CESNET z. s. p. o.
+-- Author(s): David Beneš <benes.david2000@seznam.cz>
+--
+-- SPDX-License-Identifier: BSD-3-Clause
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE IEEE.std_logic_textio.ALL;
