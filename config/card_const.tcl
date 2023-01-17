@@ -18,6 +18,8 @@ set PCIE_MOD_ARCH "USP"
 set NET_MOD_ARCH "CMAC"
 # Achitecture of SDM/SYSMON module
 set SDM_SYSMON_ARCH "USP_IDCOMP"
+# Boot controller type
+set BOOT_TYPE 3
 
 # Total number of QSFP cages
 set QSFP_CAGES       2
