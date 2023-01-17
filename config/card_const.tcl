@@ -40,4 +40,4 @@ set PCIE_ENDPOINTS     1
 # ------------------------------------------------------------------------------
 set TSU_FREQUENCY 322265625
 
-set MEM_PORTS 0
+set MEM_PORTS 2
