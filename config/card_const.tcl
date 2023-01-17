@@ -1,6 +1,6 @@
 # card_const.tcl: Card specific parameters (developement only)
 # Copyright (C) 2022 CESNET, z. s. p. o.
-# Author(s): David Beneš 	 <xbenes52@vutbr.cz>
+# Author(s): David Beneš     <xbenes52@vutbr.cz>
 #            Vladislav Valek <valekv@cesnet.cz>
 #
 # SPDX-License-Identifier: BSD-3-Clause
@@ -26,14 +26,16 @@ set QSFP_I2C_ADDR(0) "0xA0"
 set QSFP_I2C_ADDR(1) "0xA0"
 
 # ------------------------------------------------------------------------------
-# PCIe parameters (not all combinations work):
+# Checking of parameter compatibility
 # ------------------------------------------------------------------------------
-# PCIe Generation (possible values: 3):
-# 3 = PCIe Gen3
-set PCIE_GEN           3
-# PCIe endpoints (possible values: 1):
-# 1 = 1x PCIe x16 in one slot or 1x PCIe x8 in one slot
-set PCIE_ENDPOINTS     1
+
+if {!(($PCIE_ENDPOINTS == 1 && $PCIE_GEN == 3 && $PCIE_ENDPOINT_MODE == 0) ||
+      ($PCIE_ENDPOINTS == 1 && $PCIE_GEN == 3 && $PCIE_ENDPOINT_MODE == 2)) } {
+    error "Incompatible PCIe configuration: PCIE_ENDPOINTS = $PCIE_ENDPOINTS, PCIE_GEN = $PCIE_GEN, PCIE_ENDPOINT_MODE = $PCIE_ENDPOINT_MODE!
+Allowed PCIe configurations:
+- 1xGen3x16  -- PCIE_GEN=3, PCIE_ENDPOINTS=1, PCIE_ENDPOINT_MODE=0
+- 1xGen3x8LL -- PCIE_GEN=3, PCIE_ENDPOINTS=1, PCIE_ENDPOINT_MODE=2"
+}
 
 # ------------------------------------------------------------------------------
 # Other parameters:
